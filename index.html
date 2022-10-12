@@ -1,0 +1,42 @@
+<body>
+
+  <h1>
+    Hebrew Verse Memorization
+  </h1>
+  <button id="start" onclick="start()">
+    Genesis 1:1-31
+  </button>
+  <p id="verseBox">verse here</p>
+
+  <script>
+    function start() {
+      // import text!
+
+      // split text into one whole array for word bank
+      let text = " בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ *וְהָאָרֶץ הָיְתָה תֹהוּ וָבֹהוּ וְחֹשֶׁךְ עַל פְּנֵי תְהוֹם וְרוּחַ אֱלֹהִים  מְרַחֶפֶת עַל פְּנֵי הַמָּיִם * וַיֹּאמֶר אֱלֹהִים יְהִי אוֹר וַיְהִי אוֹר * וַיַּרְא אֱלֹהִים אֶת הָאוֹר כִּי טוֹב וַיַּבְדֵּל אֱלֹהִים בֵּין הָאוֹר וּבֵין הַחֹשֶׁךְ";
+			
+      let wordBankArray = text.split(" ");
+      
+      // remove duplicates and empties and asterisks
+      wordBankArray = wordBankArray.filter(s => s !== "*");
+      wordBankArray = wordBankArray.filter(s => s !== "");
+      wordBankArray = [...new Set(wordBankArray)];
+     
+      // split into verses
+			let wholeVerseArray = text.split("*");
+      wholeVerseArray = wholeVerseArray.filter(s => s !== "");
+      
+      // add each verse to its own array split by words
+      const verseArray = [];
+      for (i=0; i<wholeVerseArray.length; i++){
+      	verseArray[i] = wholeVerseArray[i].split(" ");
+      }
+      
+      // print and log check
+      document.getElementById("verseBox").innerHTML = wordBankArray;
+      console.log(verseArray);
+      console.log(wordBankArray);
+    }
+
+  </script>
+</body>
