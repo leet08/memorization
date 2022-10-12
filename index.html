@@ -1,33 +1,62 @@
 <head>
-<style>
-body {
-  margin-top: 20px;
-  margin-left: 30px;
-}
-p {
-  border: 1px solid blue;
-  padding: 2px;
-  max-width: 350px;
-  word-wrap: break-word;
-  text-align: right;
-}
+  <style>
+    @font-face {
+      font-family: 'hebrewFont';
+      src: url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500&display=swap');
+    }
 
-div {
-  padding: 2px;
-}
+    @media only screen and (min-width: 600px) {
+      body {
+        margin-top: 20px;
+        margin-left: 30px;
+      }
 
-@font-face {
-	font-family: 'hebrewFont';
-	src: url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500&display=swap');
-	}
-  
-.hebrew {
-  font-size: 24px;
-  font-family: 'hebrewFont';
-}
+      p {
+        border: 1px solid blue;
+        padding: 2px;
+        max-width: 350px;
+        word-wrap: break-word;
+        text-align: right;
+      }
 
-</style>
+      div {
+        padding: 2px;
+      }
+
+      .hebrew {
+        font-size: 24px;
+        font-family: 'hebrewFont';
+      }
+    }
+    
+    @media only screen and (max-width: 600px) {
+      body {
+        margin-top: 20px;
+        margin-left: 30px;
+        font-size = 80px;
+      }
+
+      p {
+        border: 1px solid blue;
+        padding: 2px;
+        max-width: 350px;
+        word-wrap: break-word;
+        text-align: right;
+      }
+
+      div {
+        padding: 2px;
+      }
+
+      .hebrew {
+        font-size: 80px;
+        font-family: 'hebrewFont';
+      }
+    }
+
+  </style>
 </head>
+
 <body>
 
   <h1>
@@ -37,16 +66,16 @@ div {
     Genesis 1:1-31
   </button><br>
   <div id="verseLine">Verse <span id="verseNumberText">1</span></div>
-  <p class = "hebrew" id="verseBox">Click the correct word below</p>
-  <button id="1" class = "hebrew" onclick="select(this.id, this.innerHTML)">x
+  <p class="hebrew" id="verseBox">Click the correct word below</p>
+  <button id="1" class="hebrew" onclick="select(this.id, this.innerHTML)">x
   </button>
-  <button id="2" class = "hebrew" onclick="select(this.id, this.innerHTML)">x
+  <button id="2" class="hebrew" onclick="select(this.id, this.innerHTML)">x
   </button>
-  <button id="3" class = "hebrew" onclick="select(this.id, this.innerHTML)">x
+  <button id="3" class="hebrew" onclick="select(this.id, this.innerHTML)">x
   </button>
-  <button id="4" class = "hebrew" onclick="select(this.id, this.innerHTML)">x
+  <button id="4" class="hebrew" onclick="select(this.id, this.innerHTML)">x
   </button>
-  <button id="5" class = "hebrew" onclick="select(this.id, this.innerHTML)">x
+  <button id="5" class="hebrew" onclick="select(this.id, this.innerHTML)">x
   </button>
 
   <script>
