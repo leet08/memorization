@@ -116,13 +116,14 @@
 
       // set other buttons
       let randArray = [];
+      let rand = 0;
       for (let i = 1; i <= 5; i++) {
 
         // reset color
         document.getElementById(i).style.background = "#ccf2ff";
         if (document.getElementById(i).innerHTML != this.correctWord) {
 
-          let rand = Math.floor(Math.random() * this.wordBankSet.length);
+          rand = Math.floor(Math.random() * this.wordBankSet.length);
           while ((this.wordBankSet[rand] == this.correctWord) || (randArray.find(e => e == rand) >= 0)) {
             rand = Math.floor(Math.random() * this.wordBankSet.length);
           }
