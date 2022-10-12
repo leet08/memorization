@@ -5,17 +5,18 @@
   </h1>
   <button id="start" onclick="start()">
     Genesis 1:1-31
+  </button><br>
+  <div id="verseLine">Verse <span id="verseNumberText">1</span></div>
+  <p class = "hebrew" id="verseBox">Click the correct word below</p>
+  <button id="1" class = "hebrew" onclick="select(this.id, this.innerHTML)">x
   </button>
-  <p id="verseBox">Click verse to start</p>
-  <button id="1" onclick="select()">x
+  <button id="2" class = "hebrew" onclick="select(this.id, this.innerHTML)">x
   </button>
-  <button id="2" onclick="select()">x
+  <button id="3" class = "hebrew" onclick="select(this.id, this.innerHTML)">x
   </button>
-  <button id="3" onclick="select()">x
+  <button id="4" class = "hebrew" onclick="select(this.id, this.innerHTML)">x
   </button>
-  <button id="4" onclick="select()">x
-  </button>
-  <button id="5" onclick="select()">x
+  <button id="5" class = "hebrew" onclick="select(this.id, this.innerHTML)">x
   </button>
 
   <script>
@@ -30,61 +31,135 @@
       // split text into one whole array for word bank
       let text = "בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ * וְהָאָרֶץ הָיְתָה תֹהוּ וָבֹהוּ וְחֹשֶׁךְ עַל פְּנֵי תְהוֹם וְרוּחַ אֱלֹהִים  מְרַחֶפֶ עַל פְּנֵי הַמָּיִם * וַיֹּאמֶר אֱלֹהִים יְהִי אוֹר וַיְהִי אוֹר * וַיַּרְא אֱלֹהִים אֶת הָאוֹר כִּי טוֹב וַיַּבְדֵּל אֱלֹהִים בֵּין הָאוֹר וּבֵין הַחֹשֶׁךְ";
 
-      var wordBankSet = text.split(" ");
+      this.wordBankSet = text.split(" ");
 
       // remove duplicates and empties and asterisks
-      wordBankSet = wordBankSet.filter(s => s !== "*");
-      wordBankSet = wordBankSet.filter(s => s !== "");
-      wordBankSet = [...new Set(wordBankSet)];
+      this.wordBankSet = this.wordBankSet.filter(s => s !== "*");
+      this.wordBankSet = this.wordBankSet.filter(s => s !== "");
+      this.wordBankSet = [...new Set(this.wordBankSet)];
 
       // split into verses
-      let wholeVerseArray = text.split("*");
+      this.wholeVerseArray = text.split("*");
 
       // add each verse to its own array split by words
-      var verseArray = [];
-      for (i = 0; i < wholeVerseArray.length; i++) {
-        verseArray[i] = wholeVerseArray[i].split(" ");
-        verseArray[i] = verseArray[i].filter(s => s !== "");
+      this.verseArray = [];
+      for (i = 0; i < this.wholeVerseArray.length; i++) {
+        this.verseArray[i] = this.wholeVerseArray[i].split(" ");
+        this.verseArray[i] = this.verseArray[i].filter(s => s !== "");
       }
 
       // print and log check
-      console.log(wordBankSet);
-      console.log(verseArray);
+      console.log(this.wordBankSet);
+      console.log(this.verseArray);
 
       // initiate verse and stuff
-      var numberVerses = 31;
-      var currentVerse = 1;
-      var currentWord = 0;
-      document.getElementById("verseBox").innerHTML = "___";
+      this.currentVerse = 1;
+      this.currentWord = 0;
+      this.correctWord = this.verseArray[this.currentVerse - 1][this.currentWord];
+      //document.getElementById("verseBox").innerHTML = "___";
+
+      // set buttons
+      setButtons();
+    }
+
+    function setButtons() {
 
       // set correct button
       let correctButtonRand = 1 + Math.floor(Math.random() * 5);
-      document.getElementById(correctButtonRand).innerHTML = verseArray[currentVerse - 1][currentWord];
+      document.getElementById(correctButtonRand).innerHTML = this.correctWord;
 
       // set other buttons
       let randArray = [];
       for (let i = 1; i <= 5; i++) {
-        if (document.getElementById(i).innerHTML != verseArray[currentVerse - 1][currentWord]) {
 
-          let rand = Math.floor(Math.random() * wordBankSet.length);
-          while ((wordBankSet[rand] == verseArray[currentVerse - 1][currentWord]) || (randArray.find(e => e == rand) >= 0)) {
-            rand = Math.floor(Math.random() * wordBankSet.length);
+        // reset color
+        document.getElementById(i).style.background = "#ccf2ff";
+        if (document.getElementById(i).innerHTML != this.correctWord) {
+
+          let rand = Math.floor(Math.random() * this.wordBankSet.length);
+          while ((this.wordBankSet[rand] == this.correctWord) || (randArray.find(e => e == rand) >= 0)) {
+            rand = Math.floor(Math.random() * this.wordBankSet.length);
           }
           randArray.push(rand);
-                   
-          document.getElementById(i).innerHTML = wordBankSet[rand];
 
-
+          document.getElementById(i).innerHTML = this.wordBankSet[rand];
         }
-
       }
-
-
     }
 
-    function select() {
-    	//if (currentVerse )
-      //console.log(document.getElement)
+    function select(id, word) {
+      console.log(id);
+      console.log(word);
+
+      // identify incorrect word
+      if (word != this.correctWord) {
+        document.getElementById(id).style.background = "red";
+      }
+
+      // for correct word, write in verse box
+      else {
+        if (this.currentWord == 0) {
+          this.boxText = word + "  ";
+        } else {
+          this.boxText = this.boxText + word + "  ";
+        }
+        //console.log(this.boxText);
+
+        document.getElementById("verseBox").innerHTML = this.boxText;
+
+        // if within this verse
+        if (this.currentWord < this.verseArray[this.currentVerse - 1].length - 1) {
+          // update word and buttons
+          this.currentWord++;
+          this.correctWord = this.verseArray[this.currentVerse - 1][this.currentWord];
+          console.log(this.currentWord);
+          console.log(this.correctWord);
+          setButtons();
+        }
+
+        // else update verse on last word
+        else {
+          // wait a second
+          const myTimeout = setTimeout(updateVerse, 2000);
+        }
+      }
+    }
+
+    function updateVerse() {
+      // if within number of verses in passage
+      if (this.currentVerse < this.verseArray.length) {
+        this.currentVerse++;
+        this.currentWord = 0;
+        this.correctWord = this.verseArray[this.currentVerse - 1][this.currentWord];
+        setButtons();
+        document.getElementById("verseBox").innerHTML = "___";
+        document.getElementById("verseNumberText").innerHTML = this.currentVerse;
+      }
+      // else end all
+      else {
+        alert("You did it, congratulations!");
+      }
+    }
+
+    function Game() {
+      this.numberVerses = 31;
+      this.currentVerse = 1;
+      this.currentWord = 0;
+      this.correctWord = "";
+      this.boxText = "";
+      this.wordBankSet = [];
+      this.wholeVerseArray = [];
+      this.verseArray = [];
+
+      this.start = start;
+      this.select = select;
+    }
+
+    // onload
+    window.onload = function() {
+      game1 = new Game();
+      this.start();
+
     }
 
   </script>
