@@ -1,5 +1,9 @@
 <head>
 <style>
+body {
+  margin: 10px;
+  margin-left: 10px;
+}
 p {
   border: 1px solid blue;
   padding: 2px;
@@ -25,6 +29,7 @@ div {
 </style>
 </head>
 <body>
+
   <h1>
     Hebrew Verse Memorization
   </h1>
@@ -124,9 +129,9 @@ div {
       // for correct word, write in verse box
       else {
         if (this.currentWord == 0) {
-          this.boxText = word + "  ";
+          this.boxText = word + "   ";
         } else {
-          this.boxText = this.boxText + word + "  ";
+          this.boxText = this.boxText + word + "   ";
         }
         //console.log(this.boxText);
 
