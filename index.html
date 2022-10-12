@@ -6,36 +6,85 @@
   <button id="start" onclick="start()">
     Genesis 1:1-31
   </button>
-  <p id="verseBox">verse here</p>
+  <p id="verseBox">Click verse to start</p>
+  <button id="1" onclick="select()">x
+  </button>
+  <button id="2" onclick="select()">x
+  </button>
+  <button id="3" onclick="select()">x
+  </button>
+  <button id="4" onclick="select()">x
+  </button>
+  <button id="5" onclick="select()">x
+  </button>
 
   <script>
     function start() {
-      // import text!
+      // import text
+
+      // reset buttons
+      for (let i = 1; i <= 5; i++) {
+        document.getElementById(i).innerHTML = "";
+      }
 
       // split text into one whole array for word bank
-      let text = " בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ *וְהָאָרֶץ הָיְתָה תֹהוּ וָבֹהוּ וְחֹשֶׁךְ עַל פְּנֵי תְהוֹם וְרוּחַ אֱלֹהִים  מְרַחֶפֶת עַל פְּנֵי הַמָּיִם * וַיֹּאמֶר אֱלֹהִים יְהִי אוֹר וַיְהִי אוֹר * וַיַּרְא אֱלֹהִים אֶת הָאוֹר כִּי טוֹב וַיַּבְדֵּל אֱלֹהִים בֵּין הָאוֹר וּבֵין הַחֹשֶׁךְ";
-			
-      let wordBankArray = text.split(" ");
-      
+      let text = "בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ * וְהָאָרֶץ הָיְתָה תֹהוּ וָבֹהוּ וְחֹשֶׁךְ עַל פְּנֵי תְהוֹם וְרוּחַ אֱלֹהִים  מְרַחֶפֶ עַל פְּנֵי הַמָּיִם * וַיֹּאמֶר אֱלֹהִים יְהִי אוֹר וַיְהִי אוֹר * וַיַּרְא אֱלֹהִים אֶת הָאוֹר כִּי טוֹב וַיַּבְדֵּל אֱלֹהִים בֵּין הָאוֹר וּבֵין הַחֹשֶׁךְ";
+
+      var wordBankSet = text.split(" ");
+
       // remove duplicates and empties and asterisks
-      wordBankArray = wordBankArray.filter(s => s !== "*");
-      wordBankArray = wordBankArray.filter(s => s !== "");
-      wordBankArray = [...new Set(wordBankArray)];
-     
+      wordBankSet = wordBankSet.filter(s => s !== "*");
+      wordBankSet = wordBankSet.filter(s => s !== "");
+      wordBankSet = [...new Set(wordBankSet)];
+
       // split into verses
-			let wholeVerseArray = text.split("*");
-      wholeVerseArray = wholeVerseArray.filter(s => s !== "");
-      
+      let wholeVerseArray = text.split("*");
+
       // add each verse to its own array split by words
-      const verseArray = [];
-      for (i=0; i<wholeVerseArray.length; i++){
-      	verseArray[i] = wholeVerseArray[i].split(" ");
+      var verseArray = [];
+      for (i = 0; i < wholeVerseArray.length; i++) {
+        verseArray[i] = wholeVerseArray[i].split(" ");
+        verseArray[i] = verseArray[i].filter(s => s !== "");
       }
-      
+
       // print and log check
-      document.getElementById("verseBox").innerHTML = wordBankArray;
+      console.log(wordBankSet);
       console.log(verseArray);
-      console.log(wordBankArray);
+
+      // initiate verse and stuff
+      var numberVerses = 31;
+      var currentVerse = 1;
+      var currentWord = 0;
+      document.getElementById("verseBox").innerHTML = "___";
+
+      // set correct button
+      let correctButtonRand = 1 + Math.floor(Math.random() * 5);
+      document.getElementById(correctButtonRand).innerHTML = verseArray[currentVerse - 1][currentWord];
+
+      // set other buttons
+      let randArray = [];
+      for (let i = 1; i <= 5; i++) {
+        if (document.getElementById(i).innerHTML != verseArray[currentVerse - 1][currentWord]) {
+
+          let rand = Math.floor(Math.random() * wordBankSet.length);
+          while ((wordBankSet[rand] == verseArray[currentVerse - 1][currentWord]) || (randArray.find(e => e == rand) >= 0)) {
+            rand = Math.floor(Math.random() * wordBankSet.length);
+          }
+          randArray.push(rand);
+                   
+          document.getElementById(i).innerHTML = wordBankSet[rand];
+
+
+        }
+
+      }
+
+
+    }
+
+    function select() {
+    	//if (currentVerse )
+      //console.log(document.getElement)
     }
 
   </script>
