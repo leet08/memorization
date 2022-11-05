@@ -30,12 +30,19 @@
     }
 
     button {
-      margin-top: 2px
+      margin-top: 2px;
+      margin-bottom: 6px;
+      background: #ccf2ff;
     }
 
     .hebrew {
       font-size: 28px;
       font-family: 'Frank Ruhl Libre', serif;
+    }
+
+    .audio {
+      position: absolute;
+      top: 380px;
     }
 
   </style>
@@ -55,8 +62,8 @@
   <button id="start3" onclick="start(3)">
     Genesis 1:20-31
   </button><br>
-  <div id="verseLine">Verse <span id="verseNumberText"></span></div>
-  <p class="hebrew" id="verseBox">Click the correct word below</p>
+  <span id="verseLine">Verse <span id="verseNumberText">_</span></span>
+  <p class="hebrew" id="verseBox">Select a passage</p>
   <button id="1" class="hebrew" onclick="select(this.id, this.innerHTML)">
   </button>
   <button id="2" class="hebrew" onclick="select(this.id, this.innerHTML)">
@@ -67,6 +74,7 @@
   </button>
   <button id="5" class="hebrew" onclick="select(this.id, this.innerHTML)">
   </button>
+  <div> </div>
 
   <script>
     function start(section) {
@@ -108,6 +116,7 @@
       this.wordBankSet = this.wordBankSet.filter(s => s !== "*");
       this.wordBankSet = this.wordBankSet.filter(s => s !== "");
       this.wordBankSet = [...new Set(this.wordBankSet)];
+      //console.log(this.wordBankSet.sort());
 
       // split into verses
       this.wholeVerseArray = text.split("*");
@@ -129,14 +138,15 @@
       this.correctWord = this.verseArray[this.currentVerse - 1][this.currentWord];
       document.getElementById("verseNumberText").innerHTML = this.currentVerse + this.startingVerse;
       //document.getElementById("verseBox").innerHTML = "___";
-      
+
       // set audio src to verse
       if (this.startingVerse == 0) {
         document.getElementById("audio").src = "https://docs.google.com/uc?export=download&id=" + this.audioSrcArray[this.currentVerse - 1];
-        }
+      }
 
       // set buttons
       setButtons();
+      document.getElementById("verseBox").innerHTML = "Click the correct word";
     }
 
     function setButtons() {
@@ -152,7 +162,7 @@
 
         // reset color
         document.getElementById(i).style.background = "#ccf2ff";
-        if (document.getElementById(i).innerHTML != this.correctWord) {
+        if (document.getElementById(i).innerHTML != this.correctWord || correctButtonRand != i) {
 
           rand = Math.floor(Math.random() * this.wordBankSet.length);
           while ((this.wordBankSet[rand] == this.correctWord) || (randArray.find(e => e == rand) >= 0)) {
@@ -163,8 +173,9 @@
           document.getElementById(i).innerHTML = this.wordBankSet[rand];
         }
       }
+      console.log(randArray);
 
-    
+
     }
 
     function select(id, word) {
@@ -177,7 +188,6 @@
       }
 
       // for correct word, write in verse box
-     
       else {
         if (this.currentWord == 0) {
           this.boxText = this.correctWord + "   ";
@@ -215,10 +225,10 @@
         setButtons();
         document.getElementById("verseBox").innerHTML = "___";
         document.getElementById("verseNumberText").innerHTML = this.currentVerse + this.startingVerse;
-        
+
         // set audio src to verse
-      if (this.startingVerse == 0) {
-        document.getElementById("audio").src = "https://docs.google.com/uc?export=download&id=" + this.audioSrcArray[this.currentVerse - 1];
+        if (this.startingVerse == 0) {
+          document.getElementById("audio").src = "https://docs.google.com/uc?export=download&id=" + this.audioSrcArray[this.currentVerse - 1];
         }
       }
       // else end all
@@ -258,12 +268,12 @@
     }
 
   </script>
-  <div>
+  <div class="audio">
 
     <audio id="audio" controls="controls" src=""></audio>
   </div>
   <div>
-  <button id="debug" onclick="select(this.id, this.innerHTML)">debug</button>
+    <button id="debug" style="display: none;" onclick="select(this.id, this.innerHTML)">debug</button>
   </div>
 
 </body>
