@@ -23,6 +23,7 @@
       max-width: 350px;
       word-wrap: break-word;
       text-align: right;
+      margin-top: 2px;
     }
 
     div {
@@ -42,7 +43,7 @@
 
     .audio {
       position: absolute;
-      top: 380px;
+      top: 410px;
     }
 
   </style>
@@ -62,7 +63,8 @@
   <button id="start3" onclick="start(3)">
     Genesis 1:20-31
   </button><br>
-  <span id="verseLine">Verse <span id="verseNumberText">_</span></span>
+  <div>  </div><br>
+  <span id="verseLine" style="display: none">Verse <span id="verseNumberText">_</span></span>
   <p class="hebrew" id="verseBox">Select a passage</p>
   <button id="1" class="hebrew" onclick="select(this.id, this.innerHTML)">
   </button>
@@ -142,11 +144,16 @@
       // set audio src to verse
       if (this.startingVerse == 0) {
         document.getElementById("audio").src = "https://docs.google.com/uc?export=download&id=" + this.audioSrcArray[this.currentVerse - 1];
+        document.getElementById("audio").style.display = "";
+      }
+      else{
+      	document.getElementById("audio").style.display = "none";
       }
 
       // set buttons
       setButtons();
       document.getElementById("verseBox").innerHTML = "Click the correct word";
+      document.getElementById("verseLine").style.display = "";
     }
 
     function setButtons() {
@@ -270,7 +277,7 @@
   </script>
   <div class="audio">
 
-    <audio id="audio" controls="controls" src=""></audio>
+    <audio id="audio" controls="controls" src="" style="display:none"></audio>
   </div>
   <div>
     <button id="debug" style="display: none;" onclick="select(this.id, this.innerHTML)">debug</button>
