@@ -43,7 +43,7 @@
 
     .audio {
       position: absolute;
-      top: 510px;
+      top: 530px;
     }
 
   </style>
@@ -63,7 +63,7 @@
   <button id="start3" onclick="start(3)">
     Genesis 1:20-31
   </button><br>
-  <div>  </div><br>
+  <div> </div><br>
   <span id="verseLine" style="display: none">Verse <span id="verseNumberText">_</span></span>
   <p class="hebrew" id="verseBox">Select a passage</p>
   <button id="1" class="hebrew" onclick="select(this.id, this.innerHTML)">
@@ -145,9 +145,8 @@
       if (this.startingVerse == 0) {
         document.getElementById("audio").src = "https://docs.google.com/uc?export=download&id=" + this.audioSrcArray[this.currentVerse - 1];
         document.getElementById("audio").style.display = "";
-      }
-      else{
-      	document.getElementById("audio").style.display = "none";
+      } else {
+        document.getElementById("audio").style.display = "none";
       }
 
       // set buttons
@@ -217,8 +216,13 @@
 
         // else update verse on last word
         else {
-          // wait a second
-          const myTimeout = setTimeout(updateVerse, 2000);
+          // wait a second and disable that button
+          document.getElementById(id).disabled = true;
+          setTimeout(() => {
+            document.getElementById(id).disabled = false;
+          }, 2000);
+          const myTimeout1 = setTimeout(updateVerse, 2000);
+
         }
       }
     }
@@ -280,7 +284,7 @@
     <audio id="audio" controls="controls" src="" style="display:none"></audio>
   </div>
   <div>
-    <button id="debug" style="display: ;" onclick="select(this.id, this.innerHTML)">debug</button>
+    <button id="debug" style="display: none;" onclick="select(this.id, this.innerHTML)">debug</button>
   </div>
 
 </body>
