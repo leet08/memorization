@@ -83,8 +83,11 @@
       // import text
 
       // initialize audio sources
-      this.audioSrcArray = ["1ZrO0-RFiQnPafWvdAzv_scUKaO4p99yu", "1cHq7ctaK0J_-Kn-wKvaaaG1hF1CejOfR", "1g8UlhfnZ8P3zTM6fb6bvGi-nTOYkfhWQ", "1VQkR_8pPfI5og-X0NgZHYZh_g9oVoCin", "1eOkx9Xmj7GS42ZDctApoXti2K1k9GWaH", "1oTLyGAiSj5tjMuRS4h6IMi52bc9hBfPN", "1B0N0d-IbnjLiaBYwrwkCCiDnINutpIqo", "14n1FStFFZh507683QMdqzv-eDSQjR-6i"];
-
+      this.audioSrcArray=[];
+      for (let i = 1; i <= 31; i++) {
+     		this.audioSrcArray[i] = "Genesis Verse "+i+".mp3";
+      }
+      
       // reset buttons
       for (let i = 1; i <= 5; i++) {
         document.getElementById(i).innerHTML = "";
@@ -143,7 +146,7 @@
 
       // set audio src to verse
       if (this.startingVerse == 0) {
-        document.getElementById("audio").src = "https://docs.google.com/uc?export=download&id=" + this.audioSrcArray[this.currentVerse - 1];
+        document.getElementById("audio").src = this.audioSrcArray[this.currentVerse];
         document.getElementById("audio").style.display = "";
       } else {
         document.getElementById("audio").style.display = "none";
