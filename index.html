@@ -145,7 +145,7 @@
       //document.getElementById("verseBox").innerHTML = "___";
 
       // set audio src to verse
-        document.getElementById("audio").src = this.audioSrcArray[this.currentVerse];
+        document.getElementById("audio").src = this.audioSrcArray[this.currentVerse + this.startingVerse];
         document.getElementById("audio").style.display = "";
 
       // set buttons
@@ -237,7 +237,7 @@
         document.getElementById("verseNumberText").innerHTML = this.currentVerse + this.startingVerse;
 
         // set audio src to verse
-        document.getElementById("audio").src = this.audioSrcArray[this.currentVerse];
+        document.getElementById("audio").src = this.audioSrcArray[this.currentVerse + this.startingVerse];
         
       }
       // else end all
