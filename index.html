@@ -242,7 +242,7 @@
 
         // set audio src to verse
         if (this.startingVerse == 0) {
-          document.getElementById("audio").src = "https://docs.google.com/uc?export=download&id=" + this.audioSrcArray[this.currentVerse - 1];
+          document.getElementById("audio").src = this.audioSrcArray[this.currentVerse];
         }
       }
       // else end all
