@@ -145,12 +145,8 @@
       //document.getElementById("verseBox").innerHTML = "___";
 
       // set audio src to verse
-      if (this.startingVerse == 0) {
         document.getElementById("audio").src = this.audioSrcArray[this.currentVerse];
         document.getElementById("audio").style.display = "";
-      } else {
-        document.getElementById("audio").style.display = "none";
-      }
 
       // set buttons
       setButtons();
@@ -241,9 +237,8 @@
         document.getElementById("verseNumberText").innerHTML = this.currentVerse + this.startingVerse;
 
         // set audio src to verse
-        if (this.startingVerse == 0) {
-          document.getElementById("audio").src = this.audioSrcArray[this.currentVerse];
-        }
+        document.getElementById("audio").src = this.audioSrcArray[this.currentVerse];
+        
       }
       // else end all
       else {
